@@ -1,13 +1,11 @@
 <?php
 
 use CodeIgniter\Router\RouteCollection;
-use App\Controllers\Pages;
 use App\Controllers\Alumnos;
 
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
 
 $routes->get('alumnos', [Alumnos::class, 'index']);
 

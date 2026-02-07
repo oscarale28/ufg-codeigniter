@@ -21,7 +21,12 @@ class Alumnos extends BaseController
     public function create()
     {
         $alumnoModel = new AlumnoModel();
-        $alumnoModel->insert($this->request->getPost());
+        $data = [
+            'nombre' => $this->request->getPost('nombre'),
+            'apellido' => $this->request->getPost('apellido'),
+            'telefono' => $this->request->getPost('telefono'),
+        ];
+        $alumnoModel->insert($data);
         return redirect()->to('alumnos');
     }
 
@@ -35,8 +40,12 @@ class Alumnos extends BaseController
     public function edit($id)
     {
         $alumnoModel = new AlumnoModel();
-        $data['alumno'] = $alumnoModel->find($id);
-        $alumnoModel->update($id, $this->request->getPost());
+        $data = [
+            'nombre' => $this->request->getPost('nombre'),
+            'apellido' => $this->request->getPost('apellido'),
+            'telefono' => $this->request->getPost('telefono'),
+        ];
+        $alumnoModel->update($id, $data);
         return redirect()->to('alumnos');
     }
 
