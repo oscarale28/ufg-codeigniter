@@ -7,20 +7,30 @@
 
 <div class="card shadow-sm">
     <div class="card-body">
+        <?php if (isset($validation)): ?>
+            <div class="alert alert-danger" role="alert">
+                <?= $validation->listErrors() ?>
+            </div>
+        <?php endif; ?>
         <form action="<?= base_url('alumnos/create') ?>" method="post">
             <div class="form-group">
+                <label for="carnet">Carnet</label>
+                <input type="text" id="carnet" name="carnet" class="form-control" placeholder="Carnet" value="<?= old('carnet') ?>" required>
+            </div>
+
+            <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" value="<?= old('nombre') ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="apellido">Apellido</label>
-                <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido" required>
+                <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido" value="<?= old('apellido') ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" required>
+                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" value="<?= old('telefono') ?>" required>
             </div>
 
             <div class="d-flex align-items-center">

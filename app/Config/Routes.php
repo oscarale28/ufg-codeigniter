@@ -8,6 +8,7 @@ use App\Controllers\Alumnos;
  */
 
 $routes->get('alumnos', [Alumnos::class, 'index']);
+$routes->get('alumnos_carrera', [Alumnos::class, 'alumnosPorCarrera']);
 
 $routes->get('alumnos/create', [Alumnos::class, 'renderCreate']);
 $routes->post('alumnos/create', [Alumnos::class, 'create']);

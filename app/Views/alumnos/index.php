@@ -3,7 +3,10 @@
 
 <div class="d-flex align-items-center justify-content-between mb-4">
     <h2 class="h4 mb-0">Listado de alumnos</h2>
-    <a href="<?= base_url('alumnos/create') ?>" class="btn btn-primary">Agregar alumno</a>
+    <div class="" role="group" aria-label="Acciones de alumno">
+        <a href="<?= base_url('alumnos/create') ?>" class="btn btn-primary">Agregar alumno</a>
+        <a href="<?= base_url('alumnos_carrera') ?>" class="btn btn-outline-secondary">Ver alumnos por carrera</a>
+    </div>
 </div>
 
 <div class="card shadow-sm">
@@ -14,7 +17,7 @@
             <table id="registros" class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Carnet</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Teléfono</th>
@@ -23,14 +26,16 @@
                 </thead>
                 <tbody>
                     <?php foreach ($alumnos as $alumno): ?>
+                        <?php $carnetValue = empty($alumno['carnet']) ? 'Sin carnet' : $alumno['carnet']; ?>
+                        <?php $carnetClass = empty($alumno['carnet']) ? 'text-muted' : ''; ?>
                         <tr>
-                            <td><?= $alumno['id'] ?></td>
+                            <td class="<?= $carnetClass ?>"><?= $carnetValue ?></td>
                             <td><?= $alumno['nombre'] ?></td>
                             <td><?= $alumno['apellido'] ?></td>
                             <td><?= $alumno['telefono'] ?></td>
                             <td>
-                                <div class="btn-group" role="group" aria-label="Acciones de alumno">
-                                    <a class="btn btn-sm btn-outline-primary mr-2" href="<?= base_url('alumnos/edit/' . $alumno['id']) ?>">Editar</a>
+                                <div role="group" aria-label="Acciones de alumno">
+                                    <a class="btn btn-sm btn-outline-primary" href="<?= base_url('alumnos/edit/' . $alumno['id']) ?>">Editar</a>
                                     <a class="btn btn-sm btn-outline-danger js-delete" href="<?= base_url('alumnos/delete/' . $alumno['id']) ?>">Eliminar</a>
                                 </div>
                             </td>
@@ -59,12 +64,12 @@
             columnDefs: [{
                     orderable: true,
                     className: 'desktop',
-                    targets: [0, 1, 2, 3, 4]
+                        targets: [0, 1, 2, 3, 4]
                 },
                 {
                     orderable: true,
                     className: 'not-desktop',
-                    targets: [0, 1]
+                        targets: [0, 1]
                 }
             ],
             language: {
