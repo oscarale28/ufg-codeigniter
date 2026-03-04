@@ -16,7 +16,9 @@ class Alumnos extends BaseController
 
     public function renderCreate()
     {
-        return view('alumnos/create');
+        $carreraModel = new CarreraModel();
+        $data['carreras'] = $carreraModel->getCarreras();
+        return view('alumnos/create', $data);
     }
 
     public function create()
@@ -27,6 +29,7 @@ class Alumnos extends BaseController
             'nombre' => 'required',
             'apellido' => 'required',
             'telefono' => 'required',
+            'codigo_carrera' => 'required',
         ];
 
         if (! $this->validate($rules)) {
@@ -40,7 +43,9 @@ class Alumnos extends BaseController
             'nombre' => $this->request->getPost('nombre'),
             'apellido' => $this->request->getPost('apellido'),
             'telefono' => $this->request->getPost('telefono'),
+            'codigo_carrera' => $this->request->getPost('codigo_carrera'),
         ];
+
         $alumnoModel->insert($data);
         return redirect()->to('alumnos');
     }
@@ -48,7 +53,10 @@ class Alumnos extends BaseController
     public function renderEdit($id)
     {
         $alumnoModel = new AlumnoModel();
+        $carreraModel = new CarreraModel();
+        $data['carreras'] = $carreraModel->getCarreras();
         $data['alumno'] = $alumnoModel->find($id);
+
         return view('alumnos/edit', $data);
     }
 
@@ -60,6 +68,7 @@ class Alumnos extends BaseController
             'nombre' => 'required',
             'apellido' => 'required',
             'telefono' => 'required',
+            'codigo_carrera' => 'required',
         ];
 
         if (! $this->validate($rules)) {
@@ -74,6 +83,7 @@ class Alumnos extends BaseController
             'nombre' => $this->request->getPost('nombre'),
             'apellido' => $this->request->getPost('apellido'),
             'telefono' => $this->request->getPost('telefono'),
+            'codigo_carrera' => $this->request->getPost('codigo_carrera'),
         ];
         $alumnoModel->update($id, $data);
         return redirect()->to('alumnos');
@@ -84,21 +94,5 @@ class Alumnos extends BaseController
         $alumnoModel = new AlumnoModel();
         $alumnoModel->delete($id);
         return redirect()->to('alumnos');
-    }
-
-    /**
-     * Vista para filtrar alumnos por carrera (solo lectura).
-     */
-    public function alumnosPorCarrera()
-    {
-        $carreraModel = new CarreraModel();
-        $alumnoModel = new AlumnoModel();
-
-        $data['carreras'] = $carreraModel->orderBy('nombre_carrera')->findAll();
-        $codigoCarrera = $this->request->getGet('codigo_carrera');
-        $data['codigo_carrera_seleccionado'] = $codigoCarrera;
-        $data['alumnos'] = $alumnoModel->getAlumnosConCarrera($codigoCarrera);
-
-        return view('alumnos/carrera', $data);
     }
 }

@@ -1,7 +1,7 @@
 <?php $title = 'Alumnos'; ?>
 <?= $this->include('templates/header') ?>
 
-<div class="d-flex align-items-center justify-content-between mb-4">
+<div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4">
     <h2 class="h4 mb-0">Listado de alumnos</h2>
     <div class="" role="group" aria-label="Acciones de alumno">
         <a href="<?= base_url('alumnos/create') ?>" class="btn btn-primary">Agregar alumno</a>

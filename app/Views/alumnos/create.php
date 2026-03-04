@@ -33,6 +33,16 @@
                 <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" value="<?= old('telefono') ?>" required>
             </div>
 
+            <div class="form-group">
+                <label for="codigo_carrera">Carrera</label>
+                <select name="codigo_carrera" id="codigo_carrera" class="form-control">
+                    <option value="">Seleccione una carrera...</option>
+                    <?php foreach ($carreras as $carrera): ?>
+                        <option value="<?= esc($carrera['codigo_carrera']) ?>"><?= esc($carrera['nombre_carrera']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
             <div class="d-flex align-items-center">
                 <button type="submit" class="btn btn-primary mr-2">Guardar</button>
                 <a href="<?= base_url('alumnos') ?>" class="btn btn-secondary">Cancelar</a>

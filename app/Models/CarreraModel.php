@@ -9,4 +9,9 @@ class CarreraModel extends Model
     protected $table = 'carrera';
     protected $primaryKey = 'codigo_carrera';
     protected $allowedFields = ['codigo_carrera', 'nombre_carrera'];
+
+    public function getCarreras()
+    {
+        return $this->findAll();
+    }
 }
