@@ -2,18 +2,23 @@
 
 use CodeIgniter\Router\RouteCollection;
 use App\Controllers\Alumnos;
+use App\Controllers\AlumnosCarrera;
+use Config\RoutesConstants;
 
 /**
  * @var RouteCollection $routes
  */
 
-$routes->get('alumnos', [Alumnos::class, 'index']);
-$routes->get('alumnos_carrera', [Alumnos::class, 'alumnosPorCarrera']);
+$routes->get(RoutesConstants::ALUMNOS_INDEX, [Alumnos::class, 'index']);
 
-$routes->get('alumnos/create', [Alumnos::class, 'renderCreate']);
-$routes->post('alumnos/create', [Alumnos::class, 'create']);
+# Alumons por carrera
+$routes->get(RoutesConstants::ALUMNOS_CARRERA_INDEX, [AlumnosCarrera::class, 'index']);
+$routes->post(RoutesConstants::ALUMNOS_CARRERA_FILTRAR, [AlumnosCarrera::class, 'filtrar']);
 
-$routes->get('alumnos/edit/(:num)', [Alumnos::class, 'renderEdit']);
-$routes->post('alumnos/edit/(:num)', [Alumnos::class, 'edit']);
+$routes->get(RoutesConstants::ALUMNOS_CREATE, [Alumnos::class, 'renderCreate']);
+$routes->post(RoutesConstants::ALUMNOS_CREATE, [Alumnos::class, 'create']);
 
-$routes->get('alumnos/delete/(:num)', [Alumnos::class, 'delete']);
+$routes->get(RoutesConstants::ALUMNOS_EDIT . '/(:num)', [Alumnos::class, 'renderEdit']);
+$routes->post(RoutesConstants::ALUMNOS_EDIT . '/(:num)', [Alumnos::class, 'edit']);
+
+$routes->get(RoutesConstants::ALUMNOS_DELETE . '/(:num)', [Alumnos::class, 'delete']);
